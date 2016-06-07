@@ -1,4 +1,4 @@
-gradle.properties
+*.properties
 .idea
 *.iml
 .gradle
