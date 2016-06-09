@@ -25,6 +25,12 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     private final String POPULAR_BASE_URL = "http://api.themoviedb.org/3/movie/popular?";
     private final String TOP_RATED_BASE_URL = "http://api.themoviedb.org/3/movie/top_rated?";
 
+    private AsyncResponse<ArrayList<Movie>> mResponse;
+
+    public FetchMoviesAsyncTask(AsyncResponse<ArrayList<Movie>> response) {
+        mResponse = response;
+    }
+
     @Override
     protected ArrayList<Movie> doInBackground(String... location) {
 
@@ -84,6 +90,9 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     @Override
     protected void onPostExecute(ArrayList<Movie> result) {
         if (result != null) {
+
+            mResponse.onResponse(result);
+
             for (Movie item : result) {
                 Log.d(LOG_TAG, item.getOriginalTitle());
             }
