@@ -1,9 +1,12 @@
 package mtn.popularmovies;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by matan on 08.06.2016.
  */
-public class Movie {
+public class Movie implements Parcelable{
     private final String LOG_TAG = Movie.class.getSimpleName();
 
     private int id;
@@ -13,6 +16,9 @@ public class Movie {
     private String overview;
     private String releaseDate;
     private String originalTitle;
+
+    public Movie() {
+    }
 
     public int getId() {
         return id;
@@ -77,6 +83,40 @@ public class Movie {
         return this;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(posterUrl);
+        dest.writeDouble(voteRating);
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
+        dest.writeString(originalTitle);
+    }
 
+    private Movie(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        posterUrl = in.readString();
+        voteRating = in.readDouble();
+        overview = in.readString();
+        releaseDate = in.readString();
+        originalTitle = in.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }
