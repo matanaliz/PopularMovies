@@ -11,11 +11,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by matan on 08.06.2016.
  */
-public class FetchMoviesAsyncTask extends AsyncTask<String, Void, ArrayList<Movie> > {
+public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > {
 
     private final String LOG_TAG = FetchMoviesAsyncTask.class.getSimpleName();
 
@@ -25,14 +26,14 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     private final String POPULAR_BASE_URL = "http://api.themoviedb.org/3/movie/popular?";
     private final String TOP_RATED_BASE_URL = "http://api.themoviedb.org/3/movie/top_rated?";
 
-    private AsyncResponse<ArrayList<Movie>> mResponse;
+    private AsyncResponse<List<Movie>> mResponse;
 
-    public FetchMoviesAsyncTask(AsyncResponse<ArrayList<Movie>> response) {
+    public FetchMoviesAsyncTask(AsyncResponse<List<Movie>> response) {
         mResponse = response;
     }
 
     @Override
-    protected ArrayList<Movie> doInBackground(String... location) {
+    protected List<Movie> doInBackground(String... location) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -88,7 +89,7 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Movie> result) {
+    protected void onPostExecute(List<Movie> result) {
         if (result != null) {
 
             mResponse.onResponse(result);

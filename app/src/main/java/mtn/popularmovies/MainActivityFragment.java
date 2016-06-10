@@ -10,17 +10,17 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements AsyncResponse<ArrayList<Movie>> {
+public class MainActivityFragment extends Fragment implements AsyncResponse<List<Movie>> {
 
     private MovieArrayAdapter mMovieAdapter;
 
     @Override
-    public void onResponse(ArrayList<Movie> movies){
-        //mMovieAdapter = new MovieArrayAdapter(getActivity(), movies);
+    public void onResponse(List<Movie> movies){
         mMovieAdapter.clear();
         mMovieAdapter.addAll(movies);
     }
