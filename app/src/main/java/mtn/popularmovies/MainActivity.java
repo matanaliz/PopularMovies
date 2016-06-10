@@ -24,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Picasso picasso = new Picasso.Builder(getApplicationContext()).build();
-        picasso.setIndicatorsEnabled(true);
+
+        if (BuildConfig.DEBUG) {
+            picasso.setIndicatorsEnabled(true);
+        }
+
         try {
             Picasso.setSingletonInstance(picasso);
         } catch (IllegalStateException e) {
