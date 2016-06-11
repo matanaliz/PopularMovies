@@ -6,7 +6,8 @@ import android.os.Parcelable;
 /**
  * Created by matan on 08.06.2016.
  */
-public class Movie implements Parcelable{
+public class Movie implements Parcelable {
+
     private final String LOG_TAG = Movie.class.getSimpleName();
 
     private int id;

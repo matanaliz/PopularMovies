@@ -1,7 +1,9 @@
 package mtn.popularmovies;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +47,20 @@ public class MainActivityFragment extends Fragment implements AsyncResponse<List
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                Intent intent = new Intent(getActivity(), DetailsActivity.class)
+                        .putExtra(getString(R.string.details_intent), mMovieAdapter.getItem(position));
+
+                startActivity(intent);
+            }
+        });
+
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+
+                return true;
             }
         });
 
