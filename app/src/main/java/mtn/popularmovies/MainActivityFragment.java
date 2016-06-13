@@ -55,17 +55,6 @@ public class MainActivityFragment extends Fragment implements AsyncResponse<List
             }
         });
 
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
-
-                return true;
-            }
-        });
-
-
-
         return rootView;
     }
 }

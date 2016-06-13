@@ -28,6 +28,7 @@ public class DetailsActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
 
         Intent intent = getActivity().getIntent();
+
         if (null != intent && intent.hasExtra(getString(R.string.details_intent))) {
             mMovie = intent.getParcelableExtra(getString(R.string.details_intent));
 
@@ -44,8 +45,6 @@ public class DetailsActivityFragment extends Fragment {
 
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w342/" + mMovie.getPosterUrl())
                     .into(image);
-
-            Toast.makeText(getActivity(), mMovie.getOverview(), Toast.LENGTH_SHORT).show();
         }
 
         return rootView;

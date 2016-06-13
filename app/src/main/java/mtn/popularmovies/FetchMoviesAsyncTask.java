@@ -39,10 +39,15 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > 
         BufferedReader reader = null;
         String responseJsonStr = null;
 
-        try {
+        final int PAGE = 1;
+        String page = Integer.toString(PAGE);
 
+        try {
+            final String PAGE_KEY_PARAM = "page";
             final String API_KEY_PARAM = "api_key";
+
             Uri builtUri = Uri.parse(POPULAR_BASE_URL).buildUpon()
+                    .appendQueryParameter(PAGE_KEY_PARAM, page)
                     .appendQueryParameter(API_KEY_PARAM, API_KEY).build();
 
             URL url = new URL(builtUri.toString());
