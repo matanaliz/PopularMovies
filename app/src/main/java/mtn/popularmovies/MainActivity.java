@@ -2,6 +2,12 @@ package mtn.popularmovies;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,15 +19,52 @@ import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private ViewPager mPager;
+
+    /*
+    https://developer.android.com/reference/android/support/v13/app/FragmentPagerAdapter.html
+    */
+    public class TabAdapter extends FragmentPagerAdapter {
+
+        private final String[] TAB_LIST = { getString(R.string.popular_tab_item),
+                getString(R.string.top_rated_tab_item) };
+
+        public TabAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public int getCount() {
+            return TAB_LIST.length;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            //TODO create different fragments
+            return new MainActivityFragment();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TAB_LIST[position];
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mPager);
 
         Picasso picasso = new Picasso.Builder(getApplicationContext()).build();
 
