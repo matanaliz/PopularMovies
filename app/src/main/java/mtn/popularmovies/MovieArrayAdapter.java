@@ -35,9 +35,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         }
 
         ImageView posterImage = (ImageView) convertView.findViewById(R.id.poster_view);
-
-        Log.d(LOG_TAG, "http://image.tmdb.org/t/p/w185" + movie.getPosterUrl());
-        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w342/" + movie.getPosterUrl())
+        
+        Picasso.with(mContext).load("http://image.tmdb.org/t/p/w500/" + movie.getPosterUrl())
                 .into(posterImage);
 
         return convertView;
