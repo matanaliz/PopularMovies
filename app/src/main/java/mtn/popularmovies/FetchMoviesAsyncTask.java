@@ -27,13 +27,21 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > 
     private final String TOP_RATED_BASE_URL = "http://api.themoviedb.org/3/movie/top_rated?";
 
     private AsyncResponse<List<Movie>> mResponse;
+    private String mCurrentUrl;
 
     public FetchMoviesAsyncTask(AsyncResponse<List<Movie>> response) {
         mResponse = response;
     }
 
     @Override
-    protected List<Movie> doInBackground(String... location) {
+    protected List<Movie> doInBackground(String... tabUrl) {
+
+        if (tabUrl.equals(R.string.popular_tab_item)) {
+            mCurrentUrl = POPULAR_BASE_URL;
+        }
+        else {
+            mCurrentUrl = TOP_RATED_BASE_URL;
+        }
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -46,7 +54,7 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > 
             final String PAGE_KEY_PARAM = "page";
             final String API_KEY_PARAM = "api_key";
 
-            Uri builtUri = Uri.parse(POPULAR_BASE_URL).buildUpon()
+            Uri builtUri = Uri.parse(mCurrentUrl).buildUpon()
                     .appendQueryParameter(PAGE_KEY_PARAM, page)
                     .appendQueryParameter(API_KEY_PARAM, API_KEY).build();
 

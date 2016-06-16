@@ -33,13 +33,15 @@ public class MainActivityFragment extends Fragment implements AsyncResponse<List
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        String tab = args.getString("key");
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         mMovieAdapter = new MovieArrayAdapter(getActivity(), new ArrayList<Movie>());
 
         FetchMoviesAsyncTask t = new FetchMoviesAsyncTask(this);
-        t.execute("test");
+        t.execute(tab);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview);
         gridView.setAdapter(mMovieAdapter);
