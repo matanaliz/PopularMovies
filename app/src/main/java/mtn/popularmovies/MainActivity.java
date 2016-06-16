@@ -32,21 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         private final String[] TAB_LIST = { getString(R.string.popular_tab_item),
                 getString(R.string.top_rated_tab_item) };
-        private List<Fragment> mFrags;
 
         public TabAdapter(FragmentManager fm) {
             super(fm);
-
-            mFrags = new ArrayList<>();
-
-            for (String s : TAB_LIST) {
-                Fragment frag = new MainActivityFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("key", s);
-                frag.setArguments(bundle);
-
-                mFrags.add(frag);
-            }
         }
 
         @Override
@@ -56,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return mFrags.get(position);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("key", position);
+
+            return Fragment.instantiate(getApplicationContext(), MainActivityFragment.class.getName(), bundle);
         }
 
         @Override

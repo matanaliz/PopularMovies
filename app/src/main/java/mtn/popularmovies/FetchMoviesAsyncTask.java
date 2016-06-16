@@ -36,7 +36,7 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > 
     @Override
     protected List<Movie> doInBackground(String... tabUrl) {
 
-        if (tabUrl.equals(R.string.popular_tab_item)) {
+        if (tabUrl[0].equals("0")) {
             mCurrentUrl = POPULAR_BASE_URL;
         }
         else {
