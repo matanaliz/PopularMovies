@@ -17,15 +17,15 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements AsyncResponse<List<Movie>> {
+public class MainActivityFragment extends Fragment {
+
+    private final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
     private MovieArrayAdapter mMovieAdapter;
 
-    @Override
-    public void onResponse(List<Movie> movies){
-        mMovieAdapter.clear();
-        mMovieAdapter.addAll(movies);
-    }
+    public static final String FRAGMENT_KEY = "FRAGMENT_KEY";
+    public static final String FRAGMENT_POPULAR = "FRAGMENT_POPULAR";
+    public static final String FRAGMENT_TOP_RATED = "FRAGMENT_TOP_RATED";
 
     public MainActivityFragment() {
     }
@@ -33,15 +33,15 @@ public class MainActivityFragment extends Fragment implements AsyncResponse<List
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        int tab = args.getInt("key");
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         mMovieAdapter = new MovieArrayAdapter(getActivity(), new ArrayList<Movie>());
 
-        FetchMoviesAsyncTask t = new FetchMoviesAsyncTask(this);
-        t.execute(Integer.toString(tab));
+        Bundle args = getArguments();
+        String fragmentType = args.getString(FRAGMENT_KEY);
+        FetchMoviesAsyncTask t = new FetchMoviesAsyncTask(mMovieAdapter);
+        t.execute(fragmentType);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.gridview);
         gridView.setAdapter(mMovieAdapter);

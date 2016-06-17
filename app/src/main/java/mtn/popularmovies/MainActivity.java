@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,38 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private ViewPager mPager;
 
-    /*
-    https://developer.android.com/reference/android/support/v13/app/FragmentPagerAdapter.html
-    */
-    public class TabAdapter extends FragmentPagerAdapter {
-
-        private final String[] TAB_LIST = { getString(R.string.popular_tab_item),
-                getString(R.string.top_rated_tab_item) };
-
-        public TabAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public int getCount() {
-            return TAB_LIST.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-
-            Bundle bundle = new Bundle();
-            bundle.putInt("key", position);
-
-            return Fragment.instantiate(getApplicationContext(), MainActivityFragment.class.getName(), bundle);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TAB_LIST[position];
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +34,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
+        // Fill up tabs data
+        List<Pair<String, String>> fragmentData = new ArrayList<>();
+        fragmentData.add(Pair.create(getString(R.string.popular_tab_item),
+                MainActivityFragment.FRAGMENT_POPULAR));
+        fragmentData.add(Pair.create(getString(R.string.top_rated_tab_item),
+                MainActivityFragment.FRAGMENT_TOP_RATED));
+
+        CategoryPagerAdapter adapter =
+                new CategoryPagerAdapter(getSupportFragmentManager(), getApplicationContext(), fragmentData);
+
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(adapter);
 

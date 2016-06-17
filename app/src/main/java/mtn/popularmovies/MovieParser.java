@@ -33,8 +33,7 @@ public class MovieParser {
             JSONObject res = new JSONObject(response);
             JSONArray jMovies = res.getJSONArray(MOVIE_ARRAY);
 
-            for (int i=0; i < jMovies.length(); i++)
-            {
+            for (int i=0; i < jMovies.length(); i++) {
                 try {
                     JSONObject jMovie = jMovies.getJSONObject(i);
 
