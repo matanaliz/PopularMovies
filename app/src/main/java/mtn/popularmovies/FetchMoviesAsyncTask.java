@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +35,7 @@ public class FetchMoviesAsyncTask extends AsyncTask<String, Void, List<Movie> > 
 
     @Override
     protected List<Movie> doInBackground(String... tabUrl) {
-        if (tabUrl[0].equals(MainActivityFragment.FRAGMENT_POPULAR)) {
+        if (tabUrl[0].equals(TabFragment.FRAGMENT_POPULAR)) {
             mCurrentUrl = POPULAR_BASE_URL;
         }
         else {

@@ -1,5 +1,6 @@
 package mtn.popularmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,13 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+
+        if (null != intent && intent.hasExtra(getString(R.string.details_intent))) {
+            Movie movie = intent.getParcelableExtra(getString(R.string.details_intent));
+            setTitle(movie.getTitle());
+        }
 
         setContentView(R.layout.activity_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

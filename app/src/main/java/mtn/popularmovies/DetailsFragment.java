@@ -15,11 +15,11 @@ import com.squareup.picasso.Picasso;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class DetailsActivityFragment extends Fragment {
+public class DetailsFragment extends Fragment {
 
     private Movie mMovie;
 
-    public DetailsActivityFragment() {
+    public DetailsFragment() {
     }
 
     @Override

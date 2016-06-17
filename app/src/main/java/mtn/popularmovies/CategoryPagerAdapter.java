@@ -35,9 +35,9 @@ public class CategoryPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivityFragment.FRAGMENT_KEY, mFragmentsData.get(position).second);
+        bundle.putString(TabFragment.FRAGMENT_KEY, mFragmentsData.get(position).second);
 
-        return Fragment.instantiate(mContext, MainActivityFragment.class.getName(), bundle);
+        return Fragment.instantiate(mContext, TabFragment.class.getName(), bundle);
     }
 
     @Override

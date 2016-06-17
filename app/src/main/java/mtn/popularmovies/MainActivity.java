@@ -2,17 +2,12 @@ package mtn.popularmovies;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -37,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         // Fill up tabs data
         List<Pair<String, String>> fragmentData = new ArrayList<>();
         fragmentData.add(Pair.create(getString(R.string.popular_tab_item),
-                MainActivityFragment.FRAGMENT_POPULAR));
+                TabFragment.FRAGMENT_POPULAR));
         fragmentData.add(Pair.create(getString(R.string.top_rated_tab_item),
-                MainActivityFragment.FRAGMENT_TOP_RATED));
+                TabFragment.FRAGMENT_TOP_RATED));
 
         CategoryPagerAdapter adapter =
                 new CategoryPagerAdapter(getSupportFragmentManager(), getApplicationContext(), fragmentData);
